@@ -1,77 +1,94 @@
 package com.red_badger.marsbot;
 
-import java.util.Arrays;
+import static com.red_badger.marsbot.BotOrientation.*;
 
 public class Bot {
 
-    protected int x;
-    protected int y;
-    protected String direction;
-    protected boolean lost = false;
-    protected MapBlock mapBlock;
+    protected MapBlock location;
+    private BotOrientation orientation;
 
-    public Bot(String locationString) {
-        if(locationString != null && locationString.length()>0 && locationString.contains(" ")){
-            String[] botLocation = locationString.split(" "); // Splits by space
-            //System.out.println("BOT "+ Arrays.toString(botLocation));
-            if( botLocation.length > 2 ){
-                x = Integer.parseInt(botLocation[0]);
-                y = Integer.parseInt(botLocation[1]);
-                direction = botLocation[2];
-                System.out.println(this);
+    public Bot(MapBlock location, BotOrientation orientation) {
+        if(location!=null)
+            this.location = location;
+
+        if(orientation!=null)
+            this.orientation = orientation;
+    }
+
+    public BotOrientation getOrientation() {
+        return orientation;
+    }
+
+    public void setOrientation(BotOrientation orientation) {
+        this.orientation = orientation;
+    }
+
+    public void turnLeft(){
+        orientation.turnLeft();
+    }
+
+    public void turnRight(){
+        orientation.turnRight();
+    }
+
+    public MapBlock getLocation() {
+        return location;
+    }
+
+    public void setLocation(MapBlock mapBlock) {
+        this.location = mapBlock;
+    }
+
+    public MapBlock moveForward(Map map) {
+        MapBlock newLocation;
+        int newX = orientation.getX();
+        int newY = orientation.getY();
+        switch (orientation.getDir()){
+            case N:
+                newY+=1; // Move North Y plus 1
+                newLocation = map.getBlock(newX, newY);
+                return updateLocation(map, newLocation);
+            case E:
+                newX+=1; // Move East X plus 1
+                newLocation = map.getBlock(newX, newY);
+                return updateLocation(map, newLocation);
+            case S:
+                newY-=1; // Move South Y minus 1
+                newLocation = map.getBlock(newX, newY);
+                return updateLocation(map, newLocation);
+            case W:
+                newX-=1; // Move West X minus 1
+                newLocation = map.getBlock(newX, newY);
+                return updateLocation(map, newLocation);
+            default:
+                System.out.println("moveForward unkown direction");
+                return location;
+        }
+    }
+
+    public MapBlock updateLocation(Map map, MapBlock newLocation) {
+        MapBlock currentLocation = map.getBlock(orientation.getX(), orientation.getY());
+        if(currentLocation.hasScent() && newLocation==null) {
+            return currentLocation;
+        } else {
+            if(newLocation==null){
+                MapBlock lostBotBlock = map.getBlock(orientation.getX(), orientation.getY());
+                orientation.setLost();
+                lostBotBlock.setScent();
+                lostBotBlock.clearBot();
+                return newLocation;
+            } else {
+                currentLocation.clearBot();
+                orientation.setX(newLocation.getX());
+                orientation.setY(newLocation.getY());
+                newLocation.setBot(this);
+                return newLocation;
             }
         }
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public String getDirection() {
-        return direction;
-    }
-
-    public void setDirection(String direction) {
-        this.direction = direction;
-    }
-
-    public boolean isLost() {
-        return lost;
-    }
-
-    public void setLost() {
-        lost = true;
-    }
-
-    public void setLost(boolean lost) {
-        this.lost = lost;
-    }
-
-    public MapBlock getMapBlock() {
-        return mapBlock;
-    }
-
-    public void setMapBlock(MapBlock mapBlock) {
-        this.mapBlock = mapBlock;
-    }
-
     @Override
     public String toString() {
-        if(lost)
-            return  x + " " + y + " " + direction + " LOST";
-        else
-            return  x + " " + y + " " + direction;
+        return orientation.toString();
     }
 }
