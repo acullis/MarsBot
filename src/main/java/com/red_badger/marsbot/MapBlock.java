@@ -2,12 +2,12 @@ package com.red_badger.marsbot;
 
 import static com.red_badger.marsbot.BotOrientation.*;
 
-public class MapBlock {
+public final class MapBlock {
 
-    protected int x;
-    protected int y;
-    protected boolean scent = false;
-    protected Bot bot;
+    private int x;
+    private int y;
+    private boolean scent = false;
+    private Bot bot;
 
     public MapBlock(int x, int y) {
         this.x = x;
@@ -57,13 +57,13 @@ public class MapBlock {
     @Override
     public String toString() {
         if(this.bot != null) {
-            switch(this.bot.getOrientation().getDir()) {
-                case N: return "A";
-                case E: return ">";
-                case S: return "V";
-                case W: return "<";
-                default:  return "?";
-            }
+            return switch (this.bot.getOrientation().getDir()) {
+                case N -> "A";
+                case E -> ">";
+                case S -> "V";
+                case W -> "<";
+                default -> "?";
+            };
         } else if(this.scent) {
             return "X";
         }

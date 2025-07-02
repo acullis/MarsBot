@@ -2,9 +2,9 @@ package com.red_badger.marsbot;
 
 import static com.red_badger.marsbot.BotOrientation.*;
 
-public class Bot {
+public final class Bot {
 
-    protected MapBlock location;
+    private MapBlock location;
     private BotOrientation orientation;
 
     public Bot(MapBlock location, BotOrientation orientation) {
@@ -68,17 +68,21 @@ public class Bot {
 
     public MapBlock updateLocation(Map map, MapBlock newLocation) {
         MapBlock currentLocation = map.getBlock(orientation.getX(), orientation.getY());
-        if(currentLocation.hasScent() && newLocation==null) {
+        if((currentLocation != null && currentLocation.hasScent()) && newLocation==null) {
             return currentLocation;
         } else {
             if(newLocation==null){
                 MapBlock lostBotBlock = map.getBlock(orientation.getX(), orientation.getY());
                 orientation.setLost();
-                lostBotBlock.setScent();
-                lostBotBlock.clearBot();
+                if (lostBotBlock != null) {
+                    lostBotBlock.setScent();
+                    lostBotBlock.clearBot();
+                }
                 return newLocation;
             } else {
-                currentLocation.clearBot();
+                if (currentLocation != null) {
+                    currentLocation.clearBot();
+                }
                 orientation.setX(newLocation.getX());
                 orientation.setY(newLocation.getY());
                 newLocation.setBot(this);

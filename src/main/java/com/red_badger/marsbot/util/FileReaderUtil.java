@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class FileReaderUtil {
+public final class FileReaderUtil {
 
     public static ArrayList<String> ReadFile(String fileName) throws IOException {
         String currentDirectory = System.getProperty("user.dir");
@@ -14,7 +14,7 @@ public class FileReaderUtil {
     }
 
     public static ArrayList<String> ReadFile(String filePath, String fileName) throws IOException {
-        if(filePath == null ||  filePath.length()==0) {
+        if(filePath == null || filePath.isEmpty()) {
             return null;
         }
         var fileContent = new ArrayList<String>();

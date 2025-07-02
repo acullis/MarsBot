@@ -1,6 +1,6 @@
 package com.red_badger.marsbot;
 
-public class BotOrientation {
+public final class BotOrientation {
     public static final char N = 'N';
     public static final char E = 'E';
     public static final char S = 'S';

@@ -2,13 +2,13 @@ package com.red_badger.marsbot.util;
 
 import com.red_badger.marsbot.BotOrientation;
 
-public class StringUtil {
+public final class StringUtil {
 
     /*
         String to String Array - split on 'space' character
      */
     public static String[] StringToStringArray(String content) {
-        if(content != null && content.length()>0 && content.contains(" ")){
+        if(content != null && content.contains(" ")){
             return content.split(" "); // Splits by space
         }
         return null;
@@ -19,7 +19,7 @@ public class StringUtil {
         sample: "5 3" -> {5,3}
      */
     public static int[] StringToIntArray(String content) {
-        if(content != null && content.length()>0 && content.contains(" ")){
+        if(content != null && content.contains(" ")){
             String[] contentStringArray = content.split(" "); // Splits by space
             int[] result = new int[contentStringArray.length];
             for (int i = 0; i < contentStringArray.length; i++) {
@@ -34,7 +34,7 @@ public class StringUtil {
         String to BotOrientation object - split on 'space' character
      */
     public static BotOrientation StringToBotOrientation(String content) {
-        if(content != null && content.length()>0 && content.contains(" ")){
+        if(content != null && content.contains(" ")){
             String[] contentStringArray = content.split(" "); // Splits by space
             BotOrientation botOrientation = new BotOrientation(
                     Integer.parseInt(contentStringArray[0]),

@@ -1,7 +1,8 @@
 package com.red_badger.marsbot;
 
-public class Map {
-    MapBlock[][] map = null;
+public final class Map {
+
+    private MapBlock[][] map = null;
 
     public  Map(int x, int y) {
         initMap(x, y);
@@ -28,13 +29,13 @@ public class Map {
     public String toString() {
         StringBuilder sb = new StringBuilder(System.lineSeparator());
         for (int j = map[0].length-1; j >= 0; j--) {
-            sb.append(j+"[");
-            for (int i = 0; i < map.length; i++) {
-                sb.append(map[i][j]);
+            sb.append(j).append("[");
+            for (MapBlock[] mapBlocks : map) {
+                sb.append(mapBlocks[j]);
             }
-            sb.append("]"+System.lineSeparator());
+            sb.append("]").append(System.lineSeparator());
         }
-        sb.append("  ------"+System.lineSeparator());
+        sb.append("  ------").append(System.lineSeparator());
         sb.append("  012345");
         return sb.toString();
     }
