@@ -19,8 +19,8 @@ public class MapTests {
                 "  ------\n" +
                 "  012345";
 
-        assertEquals(x+1, sut.map[0].length);
-        assertEquals(y+1, sut.map.length);
+        assertEquals(x+1, sut.getXLength());
+        assertEquals(y+1, sut.getYLength());
     }
 
     @Test
@@ -30,8 +30,8 @@ public class MapTests {
 
         Map sut = new Map(x, y);
 
-        assertEquals(x+1, sut.map.length);
-        assertEquals(y+1, sut.map[0].length);
+        assertEquals(x+1, sut.getXLength());
+        assertEquals(y+1, sut.getYLength());
         System.out.println(sut.toString());
         /*
         3[......]
@@ -50,8 +50,8 @@ public class MapTests {
 
         Map sut = new Map(x, y);
 
-        assertEquals(x+1, sut.map.length);
-        assertEquals(y+1, sut.map[0].length);
+        assertEquals(x+1, sut.getXLength());
+        assertEquals(y+1, sut.getYLength());
         System.out.println(sut.toString());
         /*
         30[...................................................]

@@ -25,6 +25,14 @@ public final class Map {
         return null;
     }
 
+    public int getXLength() {
+        return map.length;
+    }
+
+    public int getYLength() {
+        return map[0].length;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder(System.lineSeparator());
