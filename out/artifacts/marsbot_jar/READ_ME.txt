@@ -2,14 +2,74 @@
 RED BADGER TECH CHECK PROJECT
 =============================
 
-Mars Bot
-
-
 Scroll to bottom for original instructions
 
 
+# MarsBot
+Red Badger Tech Check
+---------------------
+(Scroll to bottom for original instructions)
+
+To run MarsBot use
+
+	java -jar .\marsbot.jar Input.txt
+	
+or run the Run_Marsbot.bat with Input.txt in the same directory as jar file.
+
+---------------------
+
+Sample Map Size = 5 x 3
+
+resolves to a grid with 6 x 4 blocks
+
+3[000000]
+2[000000]
+1[000000]
+0[000000]
+ -------
+ [012345]
+With the Bots initial positions as 
+
+1 1 E 
+3[000000]
+2[000000]
+1[0>0000]
+0[000000]
+  ------
+  012345
 
 
+3 2 N
+3[000000]
+2[000A00]
+1[000000]
+0[000000]
+  ------
+  012345
+
+0 3 W
+3[<00000]
+2[000000]
+1[000000]
+0[000000]
+  ------
+  012345
+
+
+All Bots Together
+
+3[<00000]
+2[000A00]
+1[0>0000]
+0[000000]
+  ------
+  012345
+
+Final Output
+------------
+1 1 E
+3 3 N LOST
+2 3 S
 
 
 
