@@ -20,12 +20,9 @@ public class FileReaderUtil {
         var fileContent = new ArrayList<String>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath + File.separator + fileName))) {
             String line;
-            System.out.println("Reading File "+filePath+":");
             while ((line = reader.readLine()) != null) {
-                System.out.println(line);
                 fileContent.add(line);
             }
-            System.out.println("Finished Reading File "+filePath);
         } catch (IOException e) {
             System.err.println("Error reading the file: " + e.getMessage());
             throw e;
